@@ -1,0 +1,201 @@
+<!--index.wxml-->
+<view class="container">
+  <view  bindtap="bindViewTap" class="userinfo">
+    <image class="icon" src="icon.png"></image>
+    <!--<text class="userinfo-nickname">{{userInfo.nickName}}</text>-->
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+    <image src="line.png" mode="aspectFit" style="height:150rpx; margin:50rpx 0rpx;"></image>
+    <text style="font-size:0.5em;margin-bottom:80rpx;">2017  {{_location}}</text>
+  </view>
+  <view class="view_normal">
+    <text>地区</text>
+      <picker bindchange="bindlocation" value="{{location_index}}" range="{{location_array}}" disabled="{{h_disabled}}">
+            <view class="picker" style="border:none;margin-right:80rpx;">
+              {{location_array[location_index]}}
+            </view>
+          </picker>
+  </view>
+  <view class="view_normal">
+    <text>税前薪资</text>
+    <input type="number" confirm-type="next" id="salary" placeholder="税前薪资" bindinput="bindinputChange" bindblur="bindblurChange" />
+  </view>
+  <view class="view_normal" style="border-bottom:none;">
+      <text>社保汇缴基数</text>
+      <input id="ssf" value="{{value_ssf_base}}" type="number" placeholder="社保汇缴基数" bindblur="bindblurChange" disabled="{{h_disabled}}" />
+  </view>
+  <view class="view_normal" style="border-bottom:none;">
+      <text>公积金汇缴基数</text>
+      <input id="housing" value="{{value_housing_base}}" type="number" placeholder="公积金汇缴基数" bindblur="bindblurChange" disabled="{{h_disabled}}" />
+  </view>
+  <view class="view_normal" style="border-bottom:none;">
+      <text>汇缴公积金</text>
+      <switch type="switch" checked bindchange="switchChange" />
+  </view>
+  <view class="view_normal">
+  <text>固定基数</text>
+      <switch type="switch" bindchange="frooze"/>
+  </view>
+  <view class="v_table">
+      <view class="v_tr">
+        <view class="v_td"></view>
+        <view class="v_td">单位应缴部分</view>
+        <view class="v_td">个人应缴部分</view>
+      </view>
+      <view class="v_tr">
+        <view class="v_td">养老保险金</view>
+        <view class="v_td"><input type="number" placeholder="{{s.e.tax.e}}%" value="{{value_endowment_fee_e}}" disabled /></view>
+        <view class="v_td"><input type="number" placeholder="{{s.e.tax.p}}%" value="{{value_endowment_fee_p}}" disabled /></view>
+      </view>
+      <view class="v_tr">
+        <view class="v_td">医疗保险金</view>
+        <view class="v_td"><input type="number" placeholder="{{s.me.tax.e}}%" value="{{value_medical_fee_e}}" disabled /></view>
+        <view class="v_td"><input type="number" placeholder="{{s.me.tax.p}}%" value="{{value_medical_fee_p}}"disabled /></view>
+      </view>
+      <view class="v_tr">
+        <view class="v_td">失业保险金</view>
+        <view class="v_td"><input type="number" placeholder="{{s.u.tax.e}}%" value="{{value_unemployment_fee_e}}" disabled /></view>
+        <view class="v_td"><input type="number" placeholder="{{s.u.tax.p}}%" value="{{value_unemployment_fee_p}}" disabled /></view>
+      </view>
+      <view class="v_tr">
+        <view class="v_td">基本住房公积金</view>
+        <view class="v_td">
+          <input type="number" placeholder="{{h.tax.e}}%" value="{{value_housing_fee_e}}" disabled />
+        </view>
+        <view class="v_td">
+          <input type="number" placeholder="{{h.tax.p}}%" value="{{value_housing_fee_p}}" disabled />
+        </view>
+      </view>
+      <view class="v_tr">
+        <view class="v_td">
+          <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" disabled="{{h_disabled}}">
+            <view class="picker">
+              {{array[index]}}%
+            </view>
+          </picker>
+          <text style="font-size:.5em;">补充住房公积金(非政策强制)</text>
+        </view>
+        <view class="v_td"><input type="number" placeholder="" value="{{value_ex_housing_fee_e}}" disabled /></view>
+        <view class="v_td"><input type="number" placeholder="" value="{{value_ex_housing_fee_p}}" disabled /></view>
+      </view>
+      <view class="v_tr">
+        <view class="v_td">工伤保险金</view>
+        <view class="v_td"><input type="number" placeholder="{{s.i.tax.e}}%" value="{{value_industrial_injury_fee_e}}" disabled /></view>
+        <view class="v_td"><input type="number" placeholder="{{s.i.tax.p}}%" value="{{value_industrial_injury_fee_p}}" disabled /></view>
+      </view>
+      <view class="v_tr">
+        <view class="v_td">生育保险金</view>
+        <view class="v_td"><input type="number" placeholder="{{s.ma.tax.e}}%" value="{{value_maternity_fee_e}}" disabled /></view>
+        <view class="v_td"><input type="number" placeholder="{{s.ma.tax.p}}%" value="{{value_maternity_fee_p}}" disabled /></view>
+      </view>
+      <view class="v_tr">
+        <view class="v_td">缴费合计:</view>
+        <view class="v_td"><input type="number" placeholder="" value="{{value_total_e}}" disabled /></view>
+        <view class="v_td"><input type="number" placeholder="" value="{{value_total_p}}" bindinput="inputChange" disabled /></view>
+      </view>
+  </view>
+  <view class="view_normal">
+      <text>扣除四金后月薪</text>
+      <input type="number" placeholder="扣除四金后月薪" value="{{value_income_tax_base}}" disabled />
+  </view>
+  <view class="view_normal">
+      <text>个人所得税</text>
+      <input type="number" placeholder="个人所得税" value="{{ value_income_tax_fee }}" disabled />
+  </view>
+  <view class="view_normal">
+      <text>支出总额</text>
+      <input type="number" placeholder="单位支出总额" value="{{ value_expenditure_e }}" disabled />|
+      <input type="number" placeholder="个人支出总额" value="{{value_expenditure_p}}" disabled />
+  </view>
+  <view class="view_normal">
+      <text>税后薪水</text>
+      <input type="number" placeholder="税后薪水" value="{{value_salary_after}}" disabled />
+  </view>
+  <view class="view_normal">
+      <text>企业总支出</text>
+      <input type="number" placeholder="企业总支出" value="{{value_all_e}}" disabled />
+  </view>
+  <view class="view_normal" style="margin-top:80rpx;">
+    <text>2017年度汇缴基数</text>
+  </view>
+  <view class="view_normal">
+      <text>社保汇缴基数</text>
+      <input type="number" placeholder="{{s.base.min}}" value="{{value_s_base_min}}" disabled />
+      <input type="number" placeholder="{{s.base.max}}" value="{{value_s_base_max}}" disabled />
+  </view>
+  <view class="view_normal">
+      <text>基本公积金汇缴额</text>
+      <input type="number" placeholder="{{h.fee.min}}" value="{{value_h_fee_min}}" disabled />
+      <input type="number" placeholder="{{h.fee.max}}" value="{{value_h_fee_max}}" disabled />
+  </view>
+  <view class="view_normal">
+      <text>补充公积金汇缴额</text>
+      <input type="number" placeholder="{{h.ex_fee.min}}" value="{{value_h_ex_fee_min}}" disabled />
+      <input type="number" placeholder="{{h.ex_fee.max}}" value="{{value_h_ex_fee_max}}" disabled />
+  </view>
+  <view class="view_normal">
+    <text style="font-size:0.5em">注：公积金实际为：{{h.expire}}上海市公积金缴存基数、比例、上下限</text>
+  </view>
+
+  <view class="view_normal" style="margin-top:80rpx;">
+    <text>个人所得税--税率表</text>
+  </view>
+  <view class="v_table">
+    <view class="v_tr">
+      <view class="v_td">级数</view>
+      <view class="v_td">累进区间</view>
+      <view class="v_td">税率</view>
+      <view class="v_td">扣除数</view>
+    </view>
+    <view class="v_tr">
+      <view class="v_td">1</view>
+      <view class="v_td">{{incometax.tax.level1.min}} - {{incometax.tax.level1.max}}</view>
+      <view class="v_td">{{incometax.tax.level1.t}}%</view>
+      <view class="v_td">{{incometax.tax.level1.takeoff}}</view>
+    </view>
+    <view class="v_tr">
+      <view class="v_td">2</view>
+      <view class="v_td">{{incometax.tax.level2.min}} - {{incometax.tax.level2.max}}</view>
+      <view class="v_td">{{incometax.tax.level2.t}}%</view>
+      <view class="v_td">{{incometax.tax.level2.takeoff}}</view>
+    </view>
+    <view class="v_tr">
+      <view class="v_td">3</view>
+      <view class="v_td">{{incometax.tax.level3.min}} - {{incometax.tax.level3.max}}</view>
+      <view class="v_td">{{incometax.tax.level3.t}}%</view>
+      <view class="v_td">{{incometax.tax.level3.takeoff}}</view>
+    </view>
+    <view class="v_tr">
+      <view class="v_td">4</view>
+      <view class="v_td">{{incometax.tax.level4.min}} - {{incometax.tax.level4.max}}</view>
+      <view class="v_td">{{incometax.tax.level4.t}}%</view>
+      <view class="v_td">{{incometax.tax.level4.takeoff}}</view>
+    </view>
+    <view class="v_tr">
+      <view class="v_td">5</view>
+      <view class="v_td">{{incometax.tax.level5.min}} - {{incometax.tax.level5.max}}</view>
+      <view class="v_td">{{incometax.tax.level5.t}}%</view>
+      <view class="v_td">{{incometax.tax.level5.takeoff}}</view>
+    </view>
+    <view class="v_tr">
+      <view class="v_td">6</view>
+      <view class="v_td">{{incometax.tax.level6.min}} - {{incometax.tax.level6.max}}</view>
+      <view class="v_td">{{incometax.tax.level6.t}}%</view>
+      <view class="v_td">{{incometax.tax.level6.takeoff}}</view>
+    </view>
+    <view class="v_tr">
+      <view class="v_td">7</view>
+      <view class="v_td">{{incometax.tax.level7.min}}</view>
+      <view class="v_td">{{incometax.tax.level7.t}}%</view>
+      <view class="v_td">{{incometax.tax.level7.takeoff}}</view>
+    </view>
+  </view>
+  <view class="view_normal">
+    注:税前扣除额{{incometax.base}},自{{incometax.begintime}}开始实行.
+  </view>
+  <view class="view_normal" style="font-size:0.5em;text-align:center;">
+    其他城市计算数据，陆续开发中，敬请期待。©2017 上海不丁网络科技有限公司
+  </view>
+</view>

@@ -1,0 +1,99 @@
+/**index.wxss**/
+.userinfo {
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  justify-content:space-between;
+  width: 100%;
+  /*height: 400rpx;*/
+  /*background-color: black;*/
+}
+
+.userinfo-avatar {
+  width: 64rpx;
+  height: 64rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+  font-size: .5em;
+}
+
+.usermotto {
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  margin: 20rpx 20rpx;
+  color:red;
+  font-size:1.3em;
+  /*height: 200rpx;*/
+}
+.icon {
+  width:64rpx;
+  height: 64rpx;
+  margin: 20rpx;
+  /*margin-right: 300rpx;*/
+}
+.view_normal{
+  /*border: 1px crimson solid;*/
+  width: 95%;
+  margin: 10rpx 10rpx;
+  padding: 10rpx 10rpx;
+  line-height: 50rpx;
+  border-bottom: 1px dashed #aaa;
+  display: flex;
+  flex-direction: row; 
+  align-items:center;
+  justify-content:space-between;
+}
+.view_normal text{
+  margin-left: 20px;
+  margin-right: 50rpx;
+  min-width: 280rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  /*border: 1px solid #aaa;*/
+}
+.v_table{
+  width: 98%;
+  display: flex;
+  flex-direction: column; 
+  margin: 10rpx auto;
+  /*padding: 10rpx 0px;*/
+  line-height: 50rpx;
+  border-bottom: 1px dashed #aaa;
+  /*border: 1px red solid;*/
+}
+.v_tr{
+  width: 100%;
+  display: flex;
+  flex-direction: row; 
+  /*margin: 10rpx auto;*/
+  /*padding: 10rpx 0px;*/
+  line-height: 50rpx;
+  /*border-bottom: 1px dashed #aaa;*/
+  /*border: 1px red solid;*/
+}
+.v_td{
+  width: 100%;
+  display: flex;
+  flex-direction: column; 
+  /*margin: 10rpx auto;*/
+  padding: 10rpx 0px;
+  line-height: 50rpx;
+  /*border-bottom: 1px dashed #aaa;*/
+  /*border: 1px red solid;*/
+}
+.v_td input{
+  text-align: center;
+  /*border: 1px red solid;*/
+}
+.picker{
+  border: 1px dashed #aaa;
+  padding: 5rpx 10rpx;
+  text-align: center;
+  width: 90%;
+}
